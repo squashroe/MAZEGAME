@@ -1,7 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -98,7 +97,6 @@ public class Main extends Application {
 
     private void createScoreLayer() {
 
-
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
         collisionText.setStroke(Color.BLACK);
         collisionText.setFill(Color.RED);
@@ -113,7 +111,6 @@ public class Main extends Application {
         collisionText.setText("");
 
         collisionText.setBoundsType(TextBoundsType.VISUAL);
-
 
     }
 

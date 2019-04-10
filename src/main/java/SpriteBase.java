@@ -190,6 +190,10 @@ public abstract class SpriteBase {
 
     }
 
+    public boolean collideWithwall(Tile blackTile){
+
+    }
+
     /**
      * Reduce health by the amount of damage that the given sprite can inflict
      * @param sprite
