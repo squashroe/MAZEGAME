@@ -10,6 +10,9 @@ public class Player extends SpriteBase {
     double playerShipMinY;
     double playerShipMaxY;
 
+    double enemyY;
+    double enemyX;
+
     Input input;
 
     double speed;
@@ -33,6 +36,7 @@ public class Player extends SpriteBase {
         playerShipMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
         playerShipMinY = 0 - image.getHeight() / 2.0;
         playerShipMaxY = Settings.SCENE_HEIGHT -image.getHeight() / 2.0;
+
 
     }
 
@@ -87,6 +91,26 @@ public class Player extends SpriteBase {
             x = playerShipMinX;
         } else if( Double.compare(x, playerShipMaxX) > 0) {
             x = playerShipMaxX;
+        }
+
+    }
+
+    public void clipWithEnemy(double playerY, double playerX, double enemyY, double enemyX){
+
+        // vertical
+        if ( Double.compare(playerY, (this.enemyY+= image.getHeight() / 2.0)) < 0){
+            y = this.enemyY;
+        }
+        else if ( Double.compare(playerY, (this.enemyY+= image.getHeight() / 2.0)) > 0){
+            y = this.enemyY;
+        }
+
+        // horizontal
+        if ( Double.compare(playerX, (this.enemyX+= image.getWidth() / 2.0)) < 0){
+            x = this.enemyX;
+        }
+        else if ( Double.compare(playerX, (this.enemyX+= image.getWidth() / 2.00)) > 0){
+            x = this.enemyX;
         }
 
     }
