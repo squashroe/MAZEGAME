@@ -20,7 +20,7 @@ public class GameEngine {
 
     public static void createScoreLayer() {
 
-
+//test
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
         collisionText.setStroke(Color.BLACK);
         collisionText.setFill(Color.RED);
