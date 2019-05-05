@@ -13,10 +13,17 @@ public class Map {
 
     private javafx.scene.image.Image floor;
     private javafx.scene.image.Image wall;
+    private javafx.scene.image.Image start;
+    private javafx.scene.image.Image end;
+    private javafx.scene.image.Image pit;
+    private javafx.scene.image.Image lockedDoor;
+    private javafx.scene.image.Image unlockedDoor;
 
     public Map(){
         floor = new Image("floor.png");
         wall = new Image("wall.png");
+        start = new Image("startTile.png");
+        end = new Image("endTile.png");
 
         openFile();
         readFile();
@@ -31,6 +38,13 @@ public class Map {
         return wall;
     }
 
+    public Image getStart() {
+        return start;
+    }
+
+    public Image getEnd() {
+        return end;
+    }
 
     public String getMap(int x, int y){
         String index = Map[y].substring(x, x + 1);

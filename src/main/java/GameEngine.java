@@ -28,14 +28,14 @@ public class GameEngine {
 //test
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
         collisionText.setStroke(Color.BLACK);
-        collisionText.setFill(Color.RED);
+        collisionText.setFill(Color.YELLOW);
 
         scoreLayer.getChildren().add(collisionText);
 
         // TODO: quick-hack to ensure the text is centered; usually you don't have that; instead you have a health bar on top
         collisionText.setText("Collision");
-        double x = (Settings.SCENE_WIDTH - collisionText.getBoundsInLocal().getWidth()) / 2;
-        double y = (Settings.SCENE_HEIGHT - collisionText.getBoundsInLocal().getHeight()) / 2;
+        double x = (90);
+        double y = (120);
         collisionText.relocate(x, y);
         collisionText.setText("");
 
@@ -58,7 +58,7 @@ public class GameEngine {
         double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        Player player = new Player(playfieldLayer, playerImage, 0, 0, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
+        Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         // register player
         players.add(player);
@@ -119,10 +119,9 @@ public class GameEngine {
         }
     }
 
-    // this part looks pointless
     public static void updateScore() {
         if (collision) {
-            collisionText.setText("Collision");
+            collisionText.setText("Game Winner");
         } else {
             collisionText.setText("");
         }
@@ -142,6 +141,12 @@ public class GameEngine {
                 }
                 if(m.getMap(x , y).equals("w")){
                     gc.drawImage(m.getWall(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(m.getMap(x , y).equals("s")){
+                    gc.drawImage(m.getStart(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(m.getMap(x , y).equals("e")){
+                    gc.drawImage(m.getEnd(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
                 }
 
             }
