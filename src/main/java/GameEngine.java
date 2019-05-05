@@ -1,5 +1,6 @@
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -12,13 +13,16 @@ import java.util.Random;
 
 public class GameEngine {
 
-    private boolean collision = false;
+    private static boolean collision = false;
     private static Text collisionText = new Text();
 
-    private Random rnd = new Random();
+    private static Random rnd = new Random();
+
+    private Image playerImage;
+    private Image enemyImage;
 
 
-    public static void createScoreLayer() {
+    public static void createScoreLayer(Pane scoreLayer) {
 
 //test
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
@@ -38,7 +42,7 @@ public class GameEngine {
 
     }
 
-    public static void createPlayers(Scene scene) {
+    public static void createPlayers(Scene scene, Image playerImage, Pane playfieldLayer, List<Player> players) {
 
         // player input
         Input input = new Input(scene);
@@ -60,7 +64,7 @@ public class GameEngine {
 
     }
 
-    public static void spawnEnemies() {
+    public static void spawnEnemies(Image enemyImage, Pane playfieldLayer, List<Enemy> enemies) {
         if (rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
             return;
         }
@@ -84,7 +88,7 @@ public class GameEngine {
 
     }
 
-    public void removeSprites(List<? extends SpriteBase> spriteList) {
+    public static void removeSprites(List<? extends SpriteBase> spriteList) {
         Iterator<? extends SpriteBase> iter = spriteList.iterator();
         while (iter.hasNext()) {
             SpriteBase sprite = iter.next();
@@ -100,7 +104,7 @@ public class GameEngine {
         }
     }
 
-    public void checkCollisions(List<Player> players, List<Enemy> enemies) {
+    public static void checkCollisions(List<Player> players, List<Enemy> enemies) {
 
         collision = false;
 
@@ -115,7 +119,7 @@ public class GameEngine {
     }
 
     // this part looks pointless
-    public void updateScore() {
+    public static void updateScore() {
         if (collision) {
             collisionText.setText("Collision");
         } else {

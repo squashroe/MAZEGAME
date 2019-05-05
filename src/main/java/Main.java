@@ -27,6 +27,7 @@ public class Main extends Application {
     private Image playerImage;
     private Image enemyImage;
 
+
     private List<Player> players = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
 
@@ -50,8 +51,8 @@ public class Main extends Application {
 
         loadGame();
 
-        GameEngine.createScoreLayer();
-        GameEngine.createPlayers(scene);
+        GameEngine.createScoreLayer(scoreLayer);
+        GameEngine.createPlayers(scene, playerImage, playfieldLayer, players);
 
         AnimationTimer gameLoop =  new AnimationTimer() {
             @Override
@@ -61,14 +62,14 @@ public class Main extends Application {
                 players.forEach(Player::processInput);
 
                 //add enemies
-                GameEngine.spawnEnemies();
+                GameEngine.spawnEnemies(enemyImage, playfieldLayer, enemies);
 
                 //movement
                 players.forEach(sprite -> sprite.move());
                 enemies.forEach(sprite -> sprite.move());
 
                 //check collisions
-                checkCollisions();
+                GameEngine.checkCollisions(players, enemies);
 
                 //update sprites in scene
                 players.forEach(sprite -> sprite.updateUI());
@@ -78,16 +79,16 @@ public class Main extends Application {
                 enemies.forEach(sprite -> sprite.checkRemovability());
 
                 //remove removables from list, layer, etc
-                removeSprites(enemies);
+                GameEngine.removeSprites(enemies);
 
                 //update the score, health etc
-                updateScore();
+                GameEngine.updateScore();
             }
         };
         gameLoop.start();
 
     }
-    private static void loadGame() {
+    private void loadGame() {
         playerImage = new Image(getClass().getResource("player.png").toExternalForm());
         enemyImage = new Image(getClass().getResource("coin.png").toExternalForm());
     }
