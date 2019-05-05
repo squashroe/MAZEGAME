@@ -11,4 +11,10 @@ public class Settings {
 
     public static int ENEMY_SPAWN_RANDOMNESS = 100;
 
+    public static int TILE_AMOUNT_WIDTH = 20;
+    public static int TILE_AMOUNT_HEIGHT = 20;
+
+    public static int TILE_SIZE= 32;
+
+
 }

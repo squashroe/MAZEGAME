@@ -1,4 +1,6 @@
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -21,7 +23,6 @@ public class GameEngine {
     private Image playerImage;
     private Image enemyImage;
 
-
     public static void createScoreLayer(Pane scoreLayer) {
 
 //test
@@ -42,7 +43,9 @@ public class GameEngine {
 
     }
 
-    public static void createPlayers(Scene scene, Image playerImage, Pane playfieldLayer, List<Player> players) {
+    public static void createPlayers(Scene scene, Pane playfieldLayer, List<Player> players) {
+
+        Image playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
 
         // player input
         Input input = new Input(scene);
@@ -50,38 +53,36 @@ public class GameEngine {
         // register input listeners
         input.addListeners(); // TODO: remove listeners on game over
 
-        Image image = playerImage;
-
         // center horizontally, position at 70% vertically
-        double x = (Settings.SCENE_WIDTH - image.getWidth()) / 2.0;
+        double x = (Settings.SCENE_WIDTH - playerImage.getWidth()) / 2.0;
         double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        Player player = new Player(playfieldLayer, image, x, y, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
+        Player player = new Player(playfieldLayer, playerImage, 0, 0, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         // register player
         players.add(player);
 
     }
 
-    public static void spawnEnemies(Image enemyImage, Pane playfieldLayer, List<Enemy> enemies) {
+    public static void spawnEnemies(Pane playfieldLayer, List<Enemy> enemies) {
         if (rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
             return;
         }
 
-        // image
-        Image image = enemyImage;
+        //image
+        Image enemyImage = new Image(GameEngine.class.getResource("coin.png").toExternalForm());
 
         // random speed
         double speed = 0 ; // rnd.nextDouble() * 1.0 + 2.0;
 
         // x position range: enemy is always fully inside the screen, no part of it is outside
         // y position: right on top of the view, so that it becomes visible with the next game iteration
-        double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - image.getWidth());
-        double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT - image.getHeight());
+        double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - enemyImage.getWidth());
+        double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT - enemyImage.getHeight());
 
         // create a sprite
-        Enemy enemy = new Enemy(playfieldLayer, image, x, y, 0, 0, speed, 1, 1, 0);
+        Enemy enemy = new Enemy(playfieldLayer, enemyImage, x, y, 0, 0, speed, 1, 1, 0);
 
         // manage sprite
         enemies.add(enemy);
@@ -125,5 +126,29 @@ public class GameEngine {
         } else {
             collisionText.setText("");
         }
+    }
+
+    public static Canvas createMap(){
+        Canvas canvas = new Canvas(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+//        gc.setFill(Color.RED);
+//        gc.fillOval(10, 60, 30, 30);
+        Map m = new Map();
+
+        for (int y = 0; y < Settings.TILE_AMOUNT_HEIGHT; y++) {
+            for (int x = 0; x < Settings.TILE_AMOUNT_WIDTH; x++) {
+                if(m.getMap(x , y).equals("f")){
+                    gc.drawImage(m.getFloor(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(m.getMap(x , y).equals("w")){
+                    gc.drawImage(m.getWall(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+
+            }
+
+        }
+
+
+        return canvas;
     }
 }

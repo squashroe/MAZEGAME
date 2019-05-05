@@ -1,25 +1,19 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
+import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class Main extends Application {
-
-
 
     private Pane playfieldLayer;
     private Pane scoreLayer;
@@ -41,6 +35,10 @@ public class Main extends Application {
         playfieldLayer = new Pane();
         scoreLayer = new Pane();
 
+        //Create the map
+
+        root.getChildren().add(GameEngine.createMap());
+
         root.getChildren().add(playfieldLayer);
         root.getChildren().add(scoreLayer);
 
@@ -49,12 +47,11 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        loadGame();
 
         GameEngine.createScoreLayer(scoreLayer);
-        GameEngine.createPlayers(scene, playerImage, playfieldLayer, players);
+        GameEngine.createPlayers(scene, playfieldLayer, players);
 
-        AnimationTimer gameLoop =  new AnimationTimer() {
+        AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
 
@@ -62,11 +59,11 @@ public class Main extends Application {
                 players.forEach(Player::processInput);
 
                 //add enemies
-                GameEngine.spawnEnemies(enemyImage, playfieldLayer, enemies);
+               // GameEngine.spawnEnemies(playfieldLayer, enemies);
 
                 //movement
                 players.forEach(sprite -> sprite.move());
-                enemies.forEach(sprite -> sprite.move());
+                //enemies.forEach(sprite -> sprite.move());
 
                 //check collisions
                 GameEngine.checkCollisions(players, enemies);
@@ -76,10 +73,10 @@ public class Main extends Application {
                 enemies.forEach(sprite -> sprite.updateUI());
 
                 // check if sprite can be removed
-                enemies.forEach(sprite -> sprite.checkRemovability());
+               // enemies.forEach(sprite -> sprite.checkRemovability());
 
                 //remove removables from list, layer, etc
-                GameEngine.removeSprites(enemies);
+               // GameEngine.removeSprites(enemies);
 
                 //update the score, health etc
                 GameEngine.updateScore();
@@ -88,10 +85,8 @@ public class Main extends Application {
         gameLoop.start();
 
     }
-    private void loadGame() {
-        playerImage = new Image(getClass().getResource("player.png").toExternalForm());
-        enemyImage = new Image(getClass().getResource("coin.png").toExternalForm());
-    }
+
+
 
 
     public static void main(String[] args) {
