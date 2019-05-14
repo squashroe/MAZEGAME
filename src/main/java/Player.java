@@ -9,6 +9,8 @@ public class Player extends SpriteBase {
     double playerShipMaxX;
     double playerShipMinY;
     double playerShipMaxY;
+    int playerTileLocationX;
+    int playerTileLocationY;
 
     double enemyY;
     double enemyX;
@@ -27,18 +29,18 @@ public class Player extends SpriteBase {
         init();
     }
 
-
     private void init() {
 
         // calculate movement bounds of the player ship
         // allow half of the ship to be outside of the screen
-        playerShipMinX = 0 - image.getWidth() / 2.0;
-        playerShipMaxX = Settings.SCENE_WIDTH - image.getWidth() / 2.0;
-        playerShipMinY = 0 - image.getHeight() / 2.0;
-        playerShipMaxY = Settings.SCENE_HEIGHT -image.getHeight() / 2.0;
-
+        playerShipMinX = 0;
+        playerShipMaxX = Settings.SCENE_WIDTH - image.getWidth();
+        playerShipMinY = 0;
+        playerShipMaxY = Settings.SCENE_HEIGHT - image.getHeight();
 
     }
+
+
 
     public void processInput() {
 
@@ -47,18 +49,19 @@ public class Player extends SpriteBase {
         // ------------------------------------
 
         // vertical direction
-        if( input.isMoveUp()) {
+        if (input.isMoveUp()) {
+            System.out.println("Floor width : " + Settings.MAP.getFloor().getWidth());
             dy = -speed;
-        } else if( input.isMoveDown()) {
+        } else if (input.isMoveDown()) {
             dy = speed;
         } else {
             dy = 0d;
         }
 
         // horizontal direction
-        if( input.isMoveLeft()) {
+        if (input.isMoveLeft()) {
             dx = -speed;
-        } else if( input.isMoveRight()) {
+        } else if (input.isMoveRight()) {
             dx = speed;
         } else {
             dx = 0d;
@@ -119,6 +122,10 @@ public class Player extends SpriteBase {
     @Override
     public void checkRemovability() {
         // TODO Auto-generated method stub
+    }
+
+    private int checkTileLocation(double coordinate){
+        return ((int) coordinate / 32);
     }
 
 }

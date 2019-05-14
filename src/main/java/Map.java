@@ -1,3 +1,5 @@
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import javax.swing.*;
@@ -10,6 +12,8 @@ public class Map {
 
     private Scanner m;
     private String Map[] = new String[Settings.TILE_AMOUNT_WIDTH];
+    private Canvas canvas = new Canvas(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+    private GraphicsContext gc;
 
     private javafx.scene.image.Image floor;
     private javafx.scene.image.Image wall;
@@ -28,6 +32,7 @@ public class Map {
         openFile();
         readFile();
         closeFile();
+        createMap();
     }
 
     public javafx.scene.image.Image getFloor(){
@@ -70,6 +75,32 @@ public class Map {
     }
 
     public void closeFile() {
+    }
+
+    public void createMap(){
+        gc = canvas.getGraphicsContext2D();
+
+        for (int y = 0; y < Settings.TILE_AMOUNT_HEIGHT; y++) {
+            for (int x = 0; x < Settings.TILE_AMOUNT_WIDTH; x++) {
+                if(getMap(x , y).equals("f")){
+                    gc.drawImage(floor, x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(getMap(x , y).equals("w")){
+                    gc.drawImage(wall, x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(getMap(x , y).equals("s")){
+                    gc.drawImage(start, x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+                if(getMap(x , y).equals("e")){
+                    gc.drawImage(end, x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+                }
+            }
+        }
+    }
+
+    public Canvas getCanvasMap(){
+
+        return canvas;
     }
 
 }

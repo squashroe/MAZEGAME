@@ -126,34 +126,4 @@ public class GameEngine {
             collisionText.setText("");
         }
     }
-
-    public static Canvas createMap(){
-        Canvas canvas = new Canvas(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-//        gc.setFill(Color.RED);
-//        gc.fillOval(10, 60, 30, 30);
-        Map m = new Map();
-
-        for (int y = 0; y < Settings.TILE_AMOUNT_HEIGHT; y++) {
-            for (int x = 0; x < Settings.TILE_AMOUNT_WIDTH; x++) {
-                if(m.getMap(x , y).equals("f")){
-                    gc.drawImage(m.getFloor(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-                }
-                if(m.getMap(x , y).equals("w")){
-                    gc.drawImage(m.getWall(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-                }
-                if(m.getMap(x , y).equals("s")){
-                    gc.drawImage(m.getStart(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-                }
-                if(m.getMap(x , y).equals("e")){
-                    gc.drawImage(m.getEnd(), x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-                }
-
-            }
-
-        }
-
-
-        return canvas;
-    }
 }

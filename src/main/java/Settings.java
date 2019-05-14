@@ -16,5 +16,7 @@ public class Settings {
 
     public static int TILE_SIZE= 32;
 
+    public static Map MAP = new Map();
+
 
 }

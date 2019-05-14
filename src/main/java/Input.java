@@ -27,7 +27,7 @@ public class Input {
 
     Scene scene;
 
-    public Input( Scene scene) {
+    public Input(Scene scene) {
         this.scene = scene;
     }
 
