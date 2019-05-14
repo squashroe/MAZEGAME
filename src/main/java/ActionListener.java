@@ -1,7 +1,10 @@
+import javafx.event.EventHandler;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class ActionListener extends KeyAdapter {
+public class ActionListener implements EventHandler<javafx.scene.input.KeyEvent> {
 
     public void keyPressed(KeyEvent e){
         int keycode = e.getKeyCode();
@@ -28,5 +31,10 @@ public class ActionListener extends KeyAdapter {
 
     public void keyTyped(KeyEvent e){
 
+    }
+
+    @Override
+    public void handle(javafx.scene.input.KeyEvent event) {
+        System.out.println("hello there");
     }
 }

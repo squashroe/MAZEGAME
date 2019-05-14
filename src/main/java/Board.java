@@ -4,12 +4,8 @@ import javafx.scene.layout.Pane;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Board extends Pane implements ActionListener {
+public class Board extends Pane {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //repaint();
-    }
 
     public void paint(Graphics g){
         Background b = null;

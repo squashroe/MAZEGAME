@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.collections.ListChangeListener;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -49,22 +50,16 @@ public class Main extends Application {
         primaryStage.show();
 
         GameEngine.createScoreLayer(scoreLayer);
-
-        // new player class test
-        PlayerOne playerOne = new PlayerOne(playfieldLayer,1,1);
-
         GameEngine.createPlayers(scene, playfieldLayer, players);
 
-        ActionListener al = new ActionListener();
 
-        addKeyListener(al);
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                
-                playerOne.updateUI();
                 //player Input
-               // players.forEach(Player::processInput);
+                for(PlayerOne players : players){
+                    players.move();
+                }
 
                 //add enemies
                // GameEngine.spawnEnemies(playfieldLayer, enemies);

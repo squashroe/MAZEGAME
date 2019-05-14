@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
 public class GameEngine {
 
     private static boolean collision = false;
@@ -45,7 +47,7 @@ public class GameEngine {
 
     public static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {
 
-        Image playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
+       // Image playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
 
         // player input
         Input input = new Input(scene);
@@ -58,7 +60,7 @@ public class GameEngine {
 //        double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        PlayerOne playerOne = new PlayerOne(playfieldLayer, 1, 1);
+        PlayerOne playerOne = new PlayerOne(playfieldLayer, 32, 32, input);
        // Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         // register player
