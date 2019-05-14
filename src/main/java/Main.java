@@ -25,7 +25,7 @@ public class Main extends Application {
     private Image playerImage;
     private Image enemyImage;
 
-    private List<Player> players = new ArrayList<>();
+    private List<PlayerOne> players = new ArrayList<>();
     private List<Enemy> enemies = new ArrayList<>();
 
     private Scene scene;
@@ -53,7 +53,7 @@ public class Main extends Application {
         // new player class test
         PlayerOne playerOne = new PlayerOne(playfieldLayer,1,1);
 
-       // GameEngine.createPlayers(scene, playfieldLayer, players);
+        GameEngine.createPlayers(scene, playfieldLayer, players);
 
         ActionListener al = new ActionListener();
 

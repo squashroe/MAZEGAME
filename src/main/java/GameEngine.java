@@ -43,7 +43,7 @@ public class GameEngine {
 
     }
 
-    public static void createPlayers(Scene scene, Pane playfieldLayer, List<Player> players) {
+    public static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {
 
         Image playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
 
@@ -54,14 +54,15 @@ public class GameEngine {
         input.addListeners(); // TODO: remove listeners on game over
 
         // center horizontally, position at 70% vertically
-        double x = (Settings.SCENE_WIDTH - playerImage.getWidth()) / 2.0;
-        double y = Settings.SCENE_HEIGHT * 0.7;
+//        double x = (Settings.SCENE_WIDTH - playerImage.getWidth()) / 2.0;
+//        double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
+        PlayerOne playerOne = new PlayerOne(playfieldLayer, 1, 1);
+       // Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         // register player
-        players.add(player);
+        players.add(playerOne);
 
     }
 

@@ -19,10 +19,11 @@ public class PlayerOne {
         playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
 
         this.imageView = new ImageView(playerImage);
-        this.imageView.relocate(tileX, tileY);
 
         this.tileX = tileX;
         this.tileY = tileY;
+
+        this.layer.getChildren().add(imageView);
     }
 
     public void move(int dx, int dy){
