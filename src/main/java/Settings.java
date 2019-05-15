@@ -1,10 +1,7 @@
 public class Settings {
 
-    public static double SCENE_WIDTH = 640;
-    public static double SCENE_HEIGHT = 640;
-
-    public static double PLAYER_SHIP_SPEED = 4.0;
-    public static double PLAYER_SHIP_HEALTH = 100.0;
+    public static int SCENE_WIDTH = 640;
+    public static int SCENE_HEIGHT = 640;
 
     public static int ENEMY_SPAWN_RANDOMNESS = 100;
 

@@ -2,11 +2,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.awt.*;
 
 public class Map {
 
@@ -58,7 +56,7 @@ public class Map {
 
     public void openFile() {
         try {
-            m = new Scanner(new File("C:\\Users\\Joshua Roe\\IdeaProjects\\MAZEGAME\\src\\main\\resources\\Map.txt"));
+            m = new Scanner(new File("C:\\Users\\Joshua Roe\\Documents\\Development\\MAZEGAME\\src\\main\\resources\\Map.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error loading map");

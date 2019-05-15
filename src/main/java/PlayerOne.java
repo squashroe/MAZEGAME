@@ -2,18 +2,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.awt.event.KeyEvent;
-
 public class PlayerOne {
 
     private final Pane layer;
     private int tileX;
     private int tileY;
+    private int x = 32;
+    private int y = 32;
     private Input input;
 
     private ImageView imageView;
 
     private Image playerImage;
+    private int playerShipMinX = 0;
+    private int playerShipMaxX = Settings.SCENE_WIDTH - 32;
+    private int playerShipMinY = 0;
+    private int playerShipMaxY = Settings.SCENE_HEIGHT - 32;
 
     public PlayerOne(Pane playfieldLayer, int tileX, int tileY, Input input) {
 
@@ -22,6 +26,7 @@ public class PlayerOne {
         playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
 
         this.imageView = new ImageView(playerImage);
+        this.imageView.relocate(x, y);
 
         this.tileX = tileX;
         this.tileY = tileY;
@@ -34,20 +39,39 @@ public class PlayerOne {
     public void move(){
 
         if(input.isMoveUp()){
-            System.out.println("you typed up");
-            //  player.move(0, -1);
+            y -= 32;
+            imageView.relocate(x, y);
         }
         if(input.isMoveDown()){
-            System.out.println("you typed down");
-
+            y += 32;
+            imageView.relocate(x, y);
         }
         if(input.isMoveLeft()){
-            System.out.println("you typed left");
-            //  player.move(0, -1);
+            x -= 32;
+            imageView.relocate(x, y);
         }
         if(input.isMoveRight()){
-            System.out.println("you typed right");
-            //  player.move(0, -1);
+            x += 32;
+            imageView.relocate(x, y);
+        }
+
+        checkBounds();
+
+    }
+    private void checkBounds() {
+
+        // vertical
+        if( Double.compare(y, playerShipMinY) < 0) {
+            y = playerShipMinY;
+        } else if( Double.compare(y, playerShipMaxY) > 0) {
+            y = playerShipMaxY;
+        }
+
+        // horizontal
+        if( Double.compare( x, playerShipMinX) < 0) {
+            x = playerShipMinX;
+        } else if( Double.compare(x, playerShipMaxX) > 0) {
+            x = playerShipMaxX;
         }
 
     }
