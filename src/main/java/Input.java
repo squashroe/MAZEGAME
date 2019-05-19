@@ -22,6 +22,10 @@ public class Input {
     private KeyCode downKey = KeyCode.DOWN;
     private KeyCode leftKey = KeyCode.LEFT;
     private KeyCode rightKey = KeyCode.RIGHT;
+    private Boolean moveUp = false;
+    private Boolean moveDown = false;
+    private Boolean moveLeft = false;
+    private Boolean moveRight = false;
     private KeyCode primaryWeaponKey = KeyCode.SPACE;
     private KeyCode secondaryWeaponKey = KeyCode.CONTROL;
 
@@ -34,7 +38,7 @@ public class Input {
     public void addListeners() {
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);
-        scene.addEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
+       // scene.addEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
 
     }
 
@@ -55,6 +59,30 @@ public class Input {
             // register key down
             keyboardBitSet.set(event.getCode().ordinal(), true);
 
+            if(event.getCode() == KeyCode.UP) {
+                moveUp = true;
+                moveDown = false;
+                moveLeft = false;
+                moveRight = false;
+            }
+            if(event.getCode() == KeyCode.DOWN) {
+                moveUp = false;
+                moveDown = true;
+                moveLeft = false;
+                moveRight = false;
+            }
+            if(event.getCode() == KeyCode.LEFT) {
+                moveUp = false;
+                moveDown = false;
+                moveLeft = true;
+                moveRight = false;
+            }
+            if(event.getCode() == KeyCode.RIGHT) {
+                moveUp = false;
+                moveDown = false;
+                moveLeft = false;
+                moveRight = true;
+            }
         }
     };
 
@@ -93,4 +121,19 @@ public class Input {
         return keyboardBitSet.get( rightKey.ordinal()) && !keyboardBitSet.get( leftKey.ordinal());
     }
 
+    public Boolean getMoveUp() {
+        return moveUp;
+    }
+
+    public Boolean getMoveDown() {
+        return moveDown;
+    }
+
+    public Boolean getMoveLeft() {
+        return moveLeft;
+    }
+
+    public Boolean getMoveRight() {
+        return moveRight;
+    }
 }

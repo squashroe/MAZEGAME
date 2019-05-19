@@ -63,6 +63,7 @@ public class GameEngine {
         PlayerOne playerOne = new PlayerOne(playfieldLayer, 32, 32, input);
        // Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
+        Settings.MAP.setPlayerOne(playerOne);
         // register player
         players.add(playerOne);
 

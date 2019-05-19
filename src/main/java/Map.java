@@ -12,6 +12,7 @@ public class Map {
     private String Map[] = new String[Settings.TILE_AMOUNT_WIDTH];
     private Canvas canvas = new Canvas(Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
     private GraphicsContext gc;
+    private PlayerOne playerOne;
 
     private javafx.scene.image.Image floor;
     private javafx.scene.image.Image wall;
@@ -56,7 +57,7 @@ public class Map {
 
     public void openFile() {
         try {
-            m = new Scanner(new File("C:\\Users\\Joshua Roe\\Documents\\Development\\MAZEGAME\\src\\main\\resources\\Map.txt"));
+            m = new Scanner(new File("C:\\Development\\MAZEGAME\\src\\main\\resources\\Map.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error loading map");
@@ -99,6 +100,10 @@ public class Map {
     public Canvas getCanvasMap(){
 
         return canvas;
+    }
+
+    public void setPlayerOne(PlayerOne playerOne) {
+        this.playerOne = playerOne;
     }
 
 }

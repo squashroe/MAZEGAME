@@ -5,19 +5,23 @@ import javafx.scene.layout.Pane;
 public class PlayerOne {
 
     private final Pane layer;
-    private int tileX;
-    private int tileY;
+    private double tileX;
+    private double tileY;
     private int x = 32;
     private int y = 32;
     private Input input;
+    private Boolean canMoveUp = true;
+    private Boolean canMoveDown = true;
+    private Boolean canMoveLeft = true;
+    private Boolean canMoveRight = true;
 
     private ImageView imageView;
 
     private Image playerImage;
-    private int playerShipMinX = 0;
-    private int playerShipMaxX = Settings.SCENE_WIDTH - 32;
-    private int playerShipMinY = 0;
-    private int playerShipMaxY = Settings.SCENE_HEIGHT - 32;
+    private int playerShipMinX = 16; // because movement is 16 this is like this.
+    private int playerShipMaxX = Settings.SCENE_WIDTH - 48;
+    private int playerShipMinY = 16;
+    private int playerShipMaxY = Settings.SCENE_HEIGHT - 48;
 
     public PlayerOne(Pane playfieldLayer, int tileX, int tileY, Input input) {
 
@@ -38,28 +42,62 @@ public class PlayerOne {
 
     public void move(){
 
-        if(input.isMoveUp()){
-            y -= 32;
-            imageView.relocate(x, y);
+//        if(input.isMoveUp()){
+//            y -= 32;
+//            imageView.relocate(x, y);
+//        }
+//        if(input.isMoveDown()){
+//            y += 32;
+//            imageView.relocate(x, y);
+//        }
+//        if(input.isMoveLeft()){
+//            x -= 32;
+//            imageView.relocate(x, y);
+//        }
+//        if(input.isMoveRight()){
+//            x += 32;
+//            imageView.relocate(x, y);
+//        }
+        if(input.getMoveUp() && canMoveUp){
+            if(!Settings.MAP.getMap(getTileX(), getTileY()-1).equals("w")) {
+                y -= 2;
+                imageView.relocate(x, y);
+            }
         }
-        if(input.isMoveDown()){
-            y += 32;
-            imageView.relocate(x, y);
+        if(input.getMoveDown() && canMoveDown){
+            if(!Settings.MAP.getMap(getTileX(), getTileY()+1).equals("w")) {
+                y += 2;
+                imageView.relocate(x, y);
+            }
         }
-        if(input.isMoveLeft()){
-            x -= 32;
-            imageView.relocate(x, y);
+        if(input.getMoveLeft() && canMoveLeft){
+            if(!Settings.MAP.getMap(getTileX() -1, getTileY()).equals("w")) {
+                x -= 2;
+                imageView.relocate(x, y);
+            }
         }
-        if(input.isMoveRight()){
-            x += 32;
-            imageView.relocate(x, y);
+        if(input.getMoveRight() && canMoveRight){
+            if(!Settings.MAP.getMap(getTileX() +1, getTileY()).equals("w")) {
+                x += 2;
+                imageView.relocate(x, y);
+            }
         }
 
         checkBounds();
 
     }
+
+//    public void checkCollisions() {
+//        if(getMap(playerOne.getTileX(), playerOne.getTileY()).equals("w")){
+//            playerOne.setCanMoveUp(false);
+//        }
+//
+//    }
+
+
     private void checkBounds() {
 
+        //not being able to leave the window
         // vertical
         if( Double.compare(y, playerShipMinY) < 0) {
             y = playerShipMinY;
@@ -76,16 +114,36 @@ public class PlayerOne {
 
     }
 
+    public void setCanMoveUp(Boolean canMoveUp) {
+        this.canMoveUp = canMoveUp;
+    }
+
+    public void setCanMoveDown(Boolean canMoveDown) {
+        this.canMoveDown = canMoveDown;
+    }
+
+    public void setCanMoveLeft(Boolean canMoveLeft) {
+        this.canMoveLeft = canMoveLeft;
+    }
+
+    public void setCanMoveRight(Boolean canMoveRight) {
+        this.canMoveRight = canMoveRight;
+    }
+
     public Image getPlayerImage() {
         return playerImage;
     }
 
     public int getTileX() {
-        return tileX;
+        tileX = (double) x / 32;
+        System.out.println(tileX);
+        return (int) tileX;
     }
 
     public int getTileY() {
-        return tileY;
+        tileY = (double) y /32;
+        System.out.println(tileY);
+        return (int) tileY;
     }
 
     public void updateUI(){
