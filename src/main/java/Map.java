@@ -57,7 +57,7 @@ public class Map {
 
     public void openFile() {
         try {
-            m = new Scanner(new File("C:\\Development\\MAZEGAME\\src\\main\\resources\\Map.txt"));
+            m = new Scanner(new File("C:\\Users\\Joshua Roe\\IdeaProjects\\MAZEGAME\\src\\main\\resources\\Map.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error loading map");

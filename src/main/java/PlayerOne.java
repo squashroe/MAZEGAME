@@ -18,7 +18,7 @@ public class PlayerOne {
     private ImageView imageView;
 
     private Image playerImage;
-    private int playerShipMinX = 16; // because movement is 16 this is like this.
+    private int playerShipMinX = 16;
     private int playerShipMaxX = Settings.SCENE_WIDTH - 48;
     private int playerShipMinY = 16;
     private int playerShipMaxY = Settings.SCENE_HEIGHT - 48;
@@ -58,29 +58,34 @@ public class PlayerOne {
 //            x += 32;
 //            imageView.relocate(x, y);
 //        }
-        if(input.getMoveUp() && canMoveUp){
-            if(!Settings.MAP.getMap(getTileX(), getTileY()-1).equals("w")) {
-                y -= 2;
+        if(input.getMoveUp()){
+            if(!Settings.MAP.getMap(getTileX(), getTileY() -1).equals("w")) {
+                y -= 32;
                 imageView.relocate(x, y);
             }
+            input.setMoveUp(false);
         }
-        if(input.getMoveDown() && canMoveDown){
+        if(input.getMoveDown()){
             if(!Settings.MAP.getMap(getTileX(), getTileY()+1).equals("w")) {
-                y += 2;
+                y += 32;
+
                 imageView.relocate(x, y);
             }
+            input.setMoveDown(false);
         }
-        if(input.getMoveLeft() && canMoveLeft){
+        if(input.getMoveLeft()){
             if(!Settings.MAP.getMap(getTileX() -1, getTileY()).equals("w")) {
-                x -= 2;
+                x -= 32;
                 imageView.relocate(x, y);
             }
+            input.setMoveLeft(false);
         }
-        if(input.getMoveRight() && canMoveRight){
+        if(input.getMoveRight()){
             if(!Settings.MAP.getMap(getTileX() +1, getTileY()).equals("w")) {
-                x += 2;
+                x += 32;
                 imageView.relocate(x, y);
             }
+            input.setMoveRight(false);
         }
 
         checkBounds();
@@ -136,13 +141,13 @@ public class PlayerOne {
 
     public int getTileX() {
         tileX = (double) x / 32;
-        System.out.println(tileX);
+        //System.out.println(tileX);
         return (int) tileX;
     }
 
     public int getTileY() {
         tileY = (double) y /32;
-        System.out.println(tileY);
+        //System.out.println(tileY);
         return (int) tileY;
     }
 

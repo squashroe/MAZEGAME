@@ -19,6 +19,7 @@ public class GameEngine {
 
     private static boolean collision = false;
     private static Text collisionText = new Text();
+    private static PlayerOne playerOne;
 
     private static Random rnd = new Random();
 
@@ -60,7 +61,7 @@ public class GameEngine {
 //        double y = Settings.SCENE_HEIGHT * 0.7;
 
         // create player
-        PlayerOne playerOne = new PlayerOne(playfieldLayer, 32, 32, input);
+        playerOne = new PlayerOne(playfieldLayer, 32, 32, input);
        // Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         Settings.MAP.setPlayerOne(playerOne);
@@ -124,7 +125,7 @@ public class GameEngine {
     }
 
     public static void updateScore() {
-        if (collision) {
+        if (Settings.MAP.getMap(playerOne.getTileX(), playerOne.getTileY()).equals("e")) {
             collisionText.setText("Game Winner");
         } else {
             collisionText.setText("");

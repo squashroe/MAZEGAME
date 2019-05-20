@@ -136,4 +136,20 @@ public class Input {
     public Boolean getMoveRight() {
         return moveRight;
     }
+
+    public void setMoveUp(Boolean moveUp) {
+        this.moveUp = moveUp;
+    }
+
+    public void setMoveDown(Boolean moveDown) {
+        this.moveDown = moveDown;
+    }
+
+    public void setMoveLeft(Boolean moveLeft) {
+        this.moveLeft = moveLeft;
+    }
+
+    public void setMoveRight(Boolean moveRight) {
+        this.moveRight = moveRight;
+    }
 }
