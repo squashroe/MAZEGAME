@@ -1,7 +1,4 @@
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -9,60 +6,38 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 
 public class GameEngine {
 
-    private static boolean collision = false;
     private static Text collisionText = new Text();
     private static PlayerOne playerOne;
 
-    private static Random rnd = new Random();
-
-    private Image playerImage;
-    private Image enemyImage;
-
     public static void createScoreLayer(Pane scoreLayer) {
 
-//test
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
         collisionText.setStroke(Color.BLACK);
         collisionText.setFill(Color.YELLOW);
 
         scoreLayer.getChildren().add(collisionText);
 
-        // TODO: quick-hack to ensure the text is centered; usually you don't have that; instead you have a health bar on top
         collisionText.setText("Collision");
         double x = (90);
         double y = (120);
         collisionText.relocate(x, y);
         collisionText.setText("");
-
         collisionText.setBoundsType(TextBoundsType.VISUAL);
-
     }
 
     public static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {
-
-       // Image playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
-
         // player input
         Input input = new Input(scene);
 
         // register input listeners
         input.addListeners(); // TODO: remove listeners on game over
 
-        // center horizontally, position at 70% vertically
-//        double x = (Settings.SCENE_WIDTH - playerImage.getWidth()) / 2.0;
-//        double y = Settings.SCENE_HEIGHT * 0.7;
-
         // create player
         playerOne = new PlayerOne(playfieldLayer, 32, 32, input);
-       // Player player = new Player(playfieldLayer, playerImage, 32, 32, 0, 0, 0, 0, Settings.PLAYER_SHIP_HEALTH, 0, Settings.PLAYER_SHIP_SPEED, input);
 
         Settings.MAP.setPlayerOne(playerOne);
         // register player
@@ -70,64 +45,12 @@ public class GameEngine {
 
     }
 
-    public static void spawnEnemies(Pane playfieldLayer, List<Enemy> enemies) {
-        if (rnd.nextInt(Settings.ENEMY_SPAWN_RANDOMNESS) != 0) {
-            return;
-        }
-
-        //image
-        Image enemyImage = new Image(GameEngine.class.getResource("coin.png").toExternalForm());
-
-        // random speed
-        double speed = 0 ; // rnd.nextDouble() * 1.0 + 2.0;
-
-        // x position range: enemy is always fully inside the screen, no part of it is outside
-        // y position: right on top of the view, so that it becomes visible with the next game iteration
-        double x = rnd.nextDouble() * (Settings.SCENE_WIDTH - enemyImage.getWidth());
-        double y = rnd.nextDouble() * (Settings.SCENE_HEIGHT - enemyImage.getHeight());
-
-        // create a sprite
-        Enemy enemy = new Enemy(playfieldLayer, enemyImage, x, y, 0, 0, speed, 1, 1, 0);
-
-        // manage sprite
-        enemies.add(enemy);
-
-    }
-
-    public static void removeSprites(List<? extends SpriteBase> spriteList) {
-        Iterator<? extends SpriteBase> iter = spriteList.iterator();
-        while (iter.hasNext()) {
-            SpriteBase sprite = iter.next();
-
-            if (sprite.isRemovable()) {
-
-                // remove from layer
-                sprite.removeFromLayer();
-
-                // remove from list
-                iter.remove();
-            }
-        }
-    }
-
-    public static void checkCollisions(List<Player> players, List<Enemy> enemies) {
-
-        collision = false;
-
-        for (Player player : players) {
-            for (Enemy enemy : enemies) {
-                if (player.collidesWith(enemy)) {
-                    collision = true;
-                    player.clipWithEnemy(player.getY(), player.getX(), enemy.getY(), enemy.getX());
-                }
-            }
-        }
-    }
-
     public static void updateScore() {
         if (Settings.MAP.getMap(playerOne.getTileX(), playerOne.getTileY()).equals("e")) {
-            collisionText.setText("Game Winner");
-        } else {
+            collisionText.setText("Game Winner!!");
+        } else if (Settings.MAP.getMap(playerOne.getTileX(), playerOne.getTileY()).equals("s")) {
+            collisionText.setText("Start");
+        } else{
             collisionText.setText("");
         }
     }

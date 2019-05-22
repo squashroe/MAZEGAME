@@ -10,10 +10,6 @@ public class PlayerOne {
     private int x = 32;
     private int y = 32;
     private Input input;
-    private Boolean canMoveUp = true;
-    private Boolean canMoveDown = true;
-    private Boolean canMoveLeft = true;
-    private Boolean canMoveRight = true;
 
     private ImageView imageView;
 
@@ -40,48 +36,32 @@ public class PlayerOne {
         this.layer.getChildren().add(imageView);
     }
 
-    public void move(){
+    public void move() {
 
-//        if(input.isMoveUp()){
-//            y -= 32;
-//            imageView.relocate(x, y);
-//        }
-//        if(input.isMoveDown()){
-//            y += 32;
-//            imageView.relocate(x, y);
-//        }
-//        if(input.isMoveLeft()){
-//            x -= 32;
-//            imageView.relocate(x, y);
-//        }
-//        if(input.isMoveRight()){
-//            x += 32;
-//            imageView.relocate(x, y);
-//        }
-        if(input.getMoveUp()){
-            if(!Settings.MAP.getMap(getTileX(), getTileY() -1).equals("w")) {
+        if (input.getMoveUp()) {
+            if (!Settings.MAP.getMap(getTileX(), getTileY() - 1).equals("w")) {
                 y -= 32;
                 imageView.relocate(x, y);
             }
             input.setMoveUp(false);
         }
-        if(input.getMoveDown()){
-            if(!Settings.MAP.getMap(getTileX(), getTileY()+1).equals("w")) {
+        if (input.getMoveDown()) {
+            if (!Settings.MAP.getMap(getTileX(), getTileY() + 1).equals("w")) {
                 y += 32;
 
                 imageView.relocate(x, y);
             }
             input.setMoveDown(false);
         }
-        if(input.getMoveLeft()){
-            if(!Settings.MAP.getMap(getTileX() -1, getTileY()).equals("w")) {
+        if (input.getMoveLeft()) {
+            if (!Settings.MAP.getMap(getTileX() - 1, getTileY()).equals("w")) {
                 x -= 32;
                 imageView.relocate(x, y);
             }
             input.setMoveLeft(false);
         }
-        if(input.getMoveRight()){
-            if(!Settings.MAP.getMap(getTileX() +1, getTileY()).equals("w")) {
+        if (input.getMoveRight()) {
+            if (!Settings.MAP.getMap(getTileX() + 1, getTileY()).equals("w")) {
                 x += 32;
                 imageView.relocate(x, y);
             }
@@ -92,51 +72,24 @@ public class PlayerOne {
 
     }
 
-//    public void checkCollisions() {
-//        if(getMap(playerOne.getTileX(), playerOne.getTileY()).equals("w")){
-//            playerOne.setCanMoveUp(false);
-//        }
-//
-//    }
-
 
     private void checkBounds() {
 
         //not being able to leave the window
         // vertical
-        if( Double.compare(y, playerShipMinY) < 0) {
+        if (Double.compare(y, playerShipMinY) < 0) {
             y = playerShipMinY;
-        } else if( Double.compare(y, playerShipMaxY) > 0) {
+        } else if (Double.compare(y, playerShipMaxY) > 0) {
             y = playerShipMaxY;
         }
 
         // horizontal
-        if( Double.compare( x, playerShipMinX) < 0) {
+        if (Double.compare(x, playerShipMinX) < 0) {
             x = playerShipMinX;
-        } else if( Double.compare(x, playerShipMaxX) > 0) {
+        } else if (Double.compare(x, playerShipMaxX) > 0) {
             x = playerShipMaxX;
         }
 
-    }
-
-    public void setCanMoveUp(Boolean canMoveUp) {
-        this.canMoveUp = canMoveUp;
-    }
-
-    public void setCanMoveDown(Boolean canMoveDown) {
-        this.canMoveDown = canMoveDown;
-    }
-
-    public void setCanMoveLeft(Boolean canMoveLeft) {
-        this.canMoveLeft = canMoveLeft;
-    }
-
-    public void setCanMoveRight(Boolean canMoveRight) {
-        this.canMoveRight = canMoveRight;
-    }
-
-    public Image getPlayerImage() {
-        return playerImage;
     }
 
     public int getTileX() {
@@ -146,13 +99,8 @@ public class PlayerOne {
     }
 
     public int getTileY() {
-        tileY = (double) y /32;
+        tileY = (double) y / 32;
         //System.out.println(tileY);
         return (int) tileY;
     }
-
-    public void updateUI(){
-        imageView.relocate(tileX, tileY);
-    }
-
 }

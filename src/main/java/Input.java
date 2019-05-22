@@ -26,8 +26,6 @@ public class Input {
     private Boolean moveDown = false;
     private Boolean moveLeft = false;
     private Boolean moveRight = false;
-    private KeyCode primaryWeaponKey = KeyCode.SPACE;
-    private KeyCode secondaryWeaponKey = KeyCode.CONTROL;
 
     Scene scene;
 
@@ -36,17 +34,12 @@ public class Input {
     }
 
     public void addListeners() {
-
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);
-       // scene.addEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
-
     }
 
     public void removeListeners() {
-
         scene.removeEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);
         scene.removeEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
-
     }
 
     /**
@@ -59,25 +52,25 @@ public class Input {
             // register key down
             keyboardBitSet.set(event.getCode().ordinal(), true);
 
-            if(event.getCode() == KeyCode.UP) {
+            if (event.getCode() == KeyCode.UP) {
                 moveUp = true;
                 moveDown = false;
                 moveLeft = false;
                 moveRight = false;
             }
-            if(event.getCode() == KeyCode.DOWN) {
+            if (event.getCode() == KeyCode.DOWN) {
                 moveUp = false;
                 moveDown = true;
                 moveLeft = false;
                 moveRight = false;
             }
-            if(event.getCode() == KeyCode.LEFT) {
+            if (event.getCode() == KeyCode.LEFT) {
                 moveUp = false;
                 moveDown = false;
                 moveLeft = true;
                 moveRight = false;
             }
-            if(event.getCode() == KeyCode.RIGHT) {
+            if (event.getCode() == KeyCode.RIGHT) {
                 moveUp = false;
                 moveDown = false;
                 moveLeft = false;
@@ -92,34 +85,10 @@ public class Input {
     private EventHandler<KeyEvent> keyReleasedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-
             // register key up
             keyboardBitSet.set(event.getCode().ordinal(), false);
-
         }
     };
-
-
-    // -------------------------------------------------
-    // Evaluate bitset of pressed keys and return the player input.
-    // If direction and its opposite direction are pressed simultaneously, then the direction isn't handled.
-    // -------------------------------------------------
-
-    public boolean isMoveUp() {
-        return keyboardBitSet.get( upKey.ordinal()) && !keyboardBitSet.get( downKey.ordinal());
-    }
-
-    public boolean isMoveDown() {
-        return keyboardBitSet.get( downKey.ordinal()) && !keyboardBitSet.get( upKey.ordinal());
-    }
-
-    public boolean isMoveLeft() {
-        return keyboardBitSet.get( leftKey.ordinal()) && !keyboardBitSet.get( rightKey.ordinal());
-    }
-
-    public boolean isMoveRight() {
-        return keyboardBitSet.get( rightKey.ordinal()) && !keyboardBitSet.get( leftKey.ordinal());
-    }
 
     public Boolean getMoveUp() {
         return moveUp;
