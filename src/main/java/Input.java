@@ -4,24 +4,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import java.util.BitSet;
 
 public class Input {
 
-    /**
-     * Bitset which registers if any {@link KeyCode} keeps being pressed or if it is released.
-     */
-    private BitSet keyboardBitSet = new BitSet();
-
-    // -------------------------------------------------
-    // default key codes
-    // will vary when you let the user customize the key codes or when you add support for a 2nd player
-    // -------------------------------------------------
-
-    private KeyCode upKey = KeyCode.UP;
-    private KeyCode downKey = KeyCode.DOWN;
-    private KeyCode leftKey = KeyCode.LEFT;
-    private KeyCode rightKey = KeyCode.RIGHT;
     private Boolean moveUp = false;
     private Boolean moveDown = false;
     private Boolean moveLeft = false;
@@ -50,34 +35,30 @@ public class Input {
         public void handle(KeyEvent event) {
 
             // register key down
-            keyboardBitSet.set(event.getCode().ordinal(), true);
+           // keyboardBitSet.set(event.getCode().ordinal(), true);
 
             if (event.getCode() == KeyCode.UP) {
-                moveUp = true;
-                moveDown = false;
-                moveLeft = false;
-                moveRight = false;
+                setMovementBools(true, false, false, false);
             }
             if (event.getCode() == KeyCode.DOWN) {
-                moveUp = false;
-                moveDown = true;
-                moveLeft = false;
-                moveRight = false;
+                setMovementBools(false, true, false, false);
             }
             if (event.getCode() == KeyCode.LEFT) {
-                moveUp = false;
-                moveDown = false;
-                moveLeft = true;
-                moveRight = false;
+                setMovementBools(false, false, true, false);
             }
             if (event.getCode() == KeyCode.RIGHT) {
-                moveUp = false;
-                moveDown = false;
-                moveLeft = false;
-                moveRight = true;
+                 setMovementBools(false, false, false, true);
             }
         }
     };
+
+    private void setMovementBools(boolean up, boolean down, boolean left, boolean right){
+        moveUp = up;
+        moveDown = down;
+        moveLeft = left;
+        moveRight = right;
+
+    }
 
     /**
      * "Key Released" handler for all input events: unregister released key in the bitset
@@ -86,7 +67,7 @@ public class Input {
         @Override
         public void handle(KeyEvent event) {
             // register key up
-            keyboardBitSet.set(event.getCode().ordinal(), false);
+           // keyboardBitSet.set(event.getCode().ordinal(), false);
         }
     };
 

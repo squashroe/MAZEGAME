@@ -34,11 +34,6 @@ public class Map {
         createMap();
     }
 
-    public javafx.scene.image.Image getFloor() {
-        return floor;
-    }
-
-
     public String getMap(int x, int y) {
         String index = Map[y].substring(x, x + 1);
         return index;
