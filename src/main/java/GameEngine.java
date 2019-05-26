@@ -21,12 +21,15 @@ public class GameEngine {
 
         scoreLayer.getChildren().add(collisionText);
 
-        collisionText.setText("Collision");
         double x = (90);
         double y = (120);
         collisionText.relocate(x, y);
         collisionText.setText("");
         collisionText.setBoundsType(TextBoundsType.VISUAL);
+    }
+
+    public static void createMenu(Pane menuLayer){
+
     }
 
     public static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {

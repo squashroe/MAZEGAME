@@ -11,6 +11,7 @@ public class Input {
     private Boolean moveDown = false;
     private Boolean moveLeft = false;
     private Boolean moveRight = false;
+    private Boolean escPressed = false;
 
     Scene scene;
 
@@ -33,7 +34,7 @@ public class Input {
     private EventHandler<KeyEvent> keyPressedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-
+            System.out.println(escPressed);
             // register key down
            // keyboardBitSet.set(event.getCode().ordinal(), true);
 
@@ -48,6 +49,14 @@ public class Input {
             }
             if (event.getCode() == KeyCode.RIGHT) {
                  setMovementBools(false, false, false, true);
+            }
+            if (event.getCode() == KeyCode.ESCAPE) {
+               if(!escPressed)
+                setEscPressed(true);
+                System.out.println(escPressed);
+            } else if (escPressed) {
+                setEscPressed(false);
+                System.out.println(escPressed);
             }
         }
     };
@@ -101,5 +110,13 @@ public class Input {
 
     public void setMoveRight(Boolean moveRight) {
         this.moveRight = moveRight;
+    }
+
+    public Boolean getEscPressed() {
+        return escPressed;
+    }
+
+    public void setEscPressed(Boolean escPressed) {
+        this.escPressed = escPressed;
     }
 }
