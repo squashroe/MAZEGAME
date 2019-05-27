@@ -63,6 +63,7 @@ public class Map {
 
     public void createMap() {
         gc = canvas.getGraphicsContext2D();
+        canvas.setHeight(680);
 
         for (int y = 0; y < Settings.TILE_AMOUNT_HEIGHT; y++) {
             for (int x = 0; x < Settings.TILE_AMOUNT_WIDTH; x++) {
@@ -83,6 +84,7 @@ public class Map {
     }
 
     public Canvas getCanvasMap() {
+
         return canvas;
     }
 

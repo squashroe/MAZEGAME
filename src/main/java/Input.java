@@ -1,6 +1,7 @@
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -34,9 +35,8 @@ public class Input {
     private EventHandler<KeyEvent> keyPressedEventHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            System.out.println(escPressed);
             // register key down
-           // keyboardBitSet.set(event.getCode().ordinal(), true);
+            // keyboardBitSet.set(event.getCode().ordinal(), true);
 
             if (event.getCode() == KeyCode.UP) {
                 setMovementBools(true, false, false, false);
@@ -48,16 +48,18 @@ public class Input {
                 setMovementBools(false, false, true, false);
             }
             if (event.getCode() == KeyCode.RIGHT) {
-                 setMovementBools(false, false, false, true);
+                setMovementBools(false, false, false, true);
             }
-            if (event.getCode() == KeyCode.ESCAPE) {
-               if(!escPressed)
-                setEscPressed(true);
-                System.out.println(escPressed);
-            } else if (escPressed) {
+            if ((event.getCode() == KeyCode.ESCAPE) && escPressed) {
                 setEscPressed(false);
                 System.out.println(escPressed);
+                return;
             }
+            if ((event.getCode() == KeyCode.ESCAPE) && !escPressed) {
+                setEscPressed(true);
+                System.out.println(escPressed);
+            }
+
         }
     };
 
@@ -66,7 +68,6 @@ public class Input {
         moveDown = down;
         moveLeft = left;
         moveRight = right;
-
     }
 
     /**

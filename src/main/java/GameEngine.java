@@ -6,6 +6,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBoundsType;
 
+import java.awt.*;
 import java.util.List;
 
 public class GameEngine {
@@ -13,7 +14,7 @@ public class GameEngine {
     private static Text collisionText = new Text();
     private static PlayerOne playerOne;
 
-    public static void createScoreLayer(Pane scoreLayer) {
+    static void createScoreLayer(Pane scoreLayer) {
 
         collisionText.setFont(Font.font(null, FontWeight.BOLD, 64));
         collisionText.setStroke(Color.BLACK);
@@ -28,11 +29,15 @@ public class GameEngine {
         collisionText.setBoundsType(TextBoundsType.VISUAL);
     }
 
-    public static void createMenu(Pane menuLayer){
+    static void createLevelEditor(Pane levelEditorLayer, Scene scene){
+        // make a box
+        // put some text in it
+        // add it to the menu layer
+
 
     }
 
-    public static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {
+    static void createPlayers(Scene scene, Pane playfieldLayer, List<PlayerOne> players) {
         // player input
         Input input = new Input(scene);
 
@@ -48,7 +53,7 @@ public class GameEngine {
 
     }
 
-    public static void updateScore() {
+    static void updateScore() {
         if (Settings.MAP.getMap(playerOne.getTileX(), playerOne.getTileY()).equals("e")) {
             collisionText.setText("Game Winner!!");
         } else if (Settings.MAP.getMap(playerOne.getTileX(), playerOne.getTileY()).equals("s")) {
@@ -56,5 +61,18 @@ public class GameEngine {
         } else{
             collisionText.setText("");
         }
+    }
+
+    static void createMenu(Scene scene) {
+        final Menu menu1 = new Menu("File");
+        final Menu menu2 = new Menu("Level Select");
+        final Menu menu3 = new Menu("Options");
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.add(menu1);
+        menuBar.add(menu2);
+        menuBar.add(menu3);
+
+
     }
 }
