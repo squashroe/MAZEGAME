@@ -1,4 +1,6 @@
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -63,16 +65,25 @@ public class GameEngine {
         }
     }
 
-    static void createMenu(Scene scene) {
-        final Menu menu1 = new Menu("File");
-        final Menu menu2 = new Menu("Level Select");
-        final Menu menu3 = new Menu("Options");
+    static MenuBar createMenu() {
+        //make the menu bar
+        javafx.scene.control.MenuBar menuBar = new javafx.scene.control.MenuBar();
 
-        MenuBar menuBar = new MenuBar();
-        menuBar.add(menu1);
-        menuBar.add(menu2);
-        menuBar.add(menu3);
+        //create the menu
+        javafx.scene.control.Menu menu = new javafx.scene.control.Menu("File");
 
+        //create the items in the menu
+        javafx.scene.control.MenuItem m1 = new javafx.scene.control.MenuItem("New");
+        javafx.scene.control.MenuItem m2 = new javafx.scene.control.MenuItem("Save");
+        javafx.scene.control.MenuItem m3 = new MenuItem("Exit");
 
+        //add them to the menu
+        menu.getItems().add(m1);
+        menu.getItems().add(m2);
+        menu.getItems().add(m3);
+
+        //add the menu to the menubar
+        menuBar.getMenus().add(menu);
+        return menuBar;
     }
 }

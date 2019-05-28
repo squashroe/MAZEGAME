@@ -17,7 +17,7 @@ public class Main extends Application {
     private Pane playfieldLayer;
     private Pane scoreLayer;
     private Pane levelEditorLayer;
-    private Pane createLevelLayer;
+    private Pane mainMenu;
 
     private List<PlayerOne> players = new ArrayList<>();
 
@@ -32,6 +32,7 @@ public class Main extends Application {
         playfieldLayer = new Pane();
         scoreLayer = new Pane();
         levelEditorLayer = new Pane();
+        mainMenu = new Pane();
 
         //Create the map
         root.getChildren().add(Settings.MAP.getCanvasMap());
@@ -41,28 +42,8 @@ public class Main extends Application {
         //add the below when it is time to create a level
         // root.getChildren().add(levelEditorLayer);
 
-        //make the menu bar
-        MenuBar menuBar = new MenuBar();
-
-        //create the menu
-        Menu menu = new Menu("File");
-
-        //create the items in the menu
-        MenuItem m1 = new MenuItem("New");
-        MenuItem m2 = new MenuItem("Save");
-        MenuItem m3 = new MenuItem("Exit");
-
-        //add them to the menu
-        menu.getItems().add(m1);
-        menu.getItems().add(m2);
-        menu.getItems().add(m3);
-
-        //add the menu to the menubar
-        menuBar.getMenus().add(menu);
-
-        menuBar.autosize();
         //add the menubar to the window
-        root.getChildren().add(menuBar);
+        root.getChildren().add(GameEngine.createMenu());
 
         scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 
