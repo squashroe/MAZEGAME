@@ -52,11 +52,13 @@ public class Input {
             }
             if ((event.getCode() == KeyCode.ESCAPE) && escPressed) {
                 setEscPressed(false);
+                Settings.ESCPRESSED = false;
                 System.out.println(escPressed);
                 return;
             }
             if ((event.getCode() == KeyCode.ESCAPE) && !escPressed) {
                 setEscPressed(true);
+                Settings.ESCPRESSED = true;
                 System.out.println(escPressed);
             }
 

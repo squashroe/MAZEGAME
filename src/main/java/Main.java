@@ -2,6 +2,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -22,10 +23,12 @@ public class Main extends Application {
     private List<PlayerOne> players = new ArrayList<>();
 
     private Scene scene;
+    private Stage primaryStage;
+    private Scene scene2;
 
 
     public void start(Stage primaryStage) {
-
+        this.primaryStage = primaryStage;
         Group root = new Group();
 
         //create the layers
@@ -43,7 +46,7 @@ public class Main extends Application {
         // root.getChildren().add(levelEditorLayer);
 
         //add the menubar to the window
-        root.getChildren().add(GameEngine.createMenu());
+        root.getChildren().add(GameEngine.createMenu(primaryStage));
 
         scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
 
@@ -51,9 +54,22 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setTitle("Maze Game");
 
+
         GameEngine.createScoreLayer(scoreLayer);
         GameEngine.createPlayers(scene, playfieldLayer, players);
         GameEngine.createLevelEditor(levelEditorLayer, scene);
+
+        GameEngine.createMainMenuLayer(mainMenu);
+
+        Label label1 = new Label("Start Game");
+        Label label2 = new Label("Level Editor");
+        Button button1 = new Button("Return to Game");
+        VBox layout1 = new VBox(30);
+        layout1.getChildren().addAll(label1, label2, button1);
+        scene2 = new Scene(layout1, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        button1.setOnAction(e -> doshit());
+
+
 
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
@@ -66,6 +82,8 @@ public class Main extends Application {
                 //show when you complete a level
                 GameEngine.updateScore();
 
+
+
                 //access the menu
 
                 //access the level editor
@@ -75,6 +93,12 @@ public class Main extends Application {
             }
         };
         gameLoop.start();
+    }
+
+    void doshit(){
+        primaryStage.setScene(scene);
+        GameEngine.createPlayers(scene2, playfieldLayer, players);
+        System.out.println("HELLO");
     }
 }
 

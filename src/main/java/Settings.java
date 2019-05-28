@@ -9,4 +9,6 @@ public class Settings {
 
     public static Map MAP = new Map();
 
+    public static boolean ESCPRESSED;
+
 }
