@@ -42,7 +42,8 @@ public class Map {
     public void openFile() {
         URL url = getClass().getResource("Map.txt");
         try {
-            m = new Scanner(new File(url.getPath()));
+//            m = new Scanner(new File(url.getPath()));
+            m = new Scanner(new File("C:\\Users\\Joshua Roe\\IdeaProjects\\MAZEGAME\\src\\main\\resources\\Map.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error loading map");

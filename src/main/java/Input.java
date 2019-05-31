@@ -1,7 +1,6 @@
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -12,7 +11,7 @@ public class Input {
     private Boolean moveDown = false;
     private Boolean moveLeft = false;
     private Boolean moveRight = false;
-    private Boolean escPressed = false;
+    private Boolean escReleased = true;
 
     Scene scene;
 
@@ -22,6 +21,8 @@ public class Input {
 
     public void addListeners() {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyPressedEventHandler);
+        scene.addEventFilter(KeyEvent.KEY_RELEASED, keyReleasedEventHandler);
+
     }
 
     public void removeListeners() {
@@ -50,16 +51,16 @@ public class Input {
             if (event.getCode() == KeyCode.RIGHT) {
                 setMovementBools(false, false, false, true);
             }
-            if ((event.getCode() == KeyCode.ESCAPE) && escPressed) {
-                setEscPressed(false);
+            if ((event.getCode() == KeyCode.ESCAPE) && escReleased  && Settings.ESCPRESSED) {
+                escReleased = false;
                 Settings.ESCPRESSED = false;
-                System.out.println(escPressed);
+                System.out.println(Settings.ESCPRESSED);
                 return;
             }
-            if ((event.getCode() == KeyCode.ESCAPE) && !escPressed) {
-                setEscPressed(true);
+            if ((event.getCode() == KeyCode.ESCAPE) && escReleased) {
+                escReleased = false;
                 Settings.ESCPRESSED = true;
-                System.out.println(escPressed);
+                System.out.println(Settings.ESCPRESSED);
             }
 
         }
@@ -80,6 +81,9 @@ public class Input {
         public void handle(KeyEvent event) {
             // register key up
            // keyboardBitSet.set(event.getCode().ordinal(), false);
+            if(event.getCode() == KeyCode.ESCAPE){
+                escReleased = true;
+            }
         }
     };
 
@@ -115,11 +119,11 @@ public class Input {
         this.moveRight = moveRight;
     }
 
-    public Boolean getEscPressed() {
-        return escPressed;
+    public Boolean getEscReleased() {
+        return escReleased;
     }
 
-    public void setEscPressed(Boolean escPressed) {
-        this.escPressed = escPressed;
+    public void setEscReleased(Boolean escReleased) {
+        this.escReleased = escReleased;
     }
 }
