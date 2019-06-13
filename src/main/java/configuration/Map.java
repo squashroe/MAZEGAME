@@ -1,6 +1,9 @@
+package configuration;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import screens.game.PlayerOne;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +46,7 @@ public class Map {
         URL url = getClass().getResource("Map.txt");
         try {
 //            m = new Scanner(new File(url.getPath()));
-            m = new Scanner(new File("C:\\Users\\Joshua Roe\\IdeaProjects\\MAZEGAME\\src\\main\\resources\\Map.txt"));
+            m = new Scanner(new File("C:\\Development\\MAZEGAME\\src\\main\\resources\\Map.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("error loading map");

@@ -1,3 +1,8 @@
+package configuration;
+
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
 public class Settings {
 
     public static int SCENE_WIDTH = 640;
@@ -10,5 +15,7 @@ public class Settings {
     public static Map MAP = new Map();
 
     public static boolean ESCPRESSED;
+
+    public static final Font FONT = Font.font("", FontWeight.BOLD, 22);
 
 }

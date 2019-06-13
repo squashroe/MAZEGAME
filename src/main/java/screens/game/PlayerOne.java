@@ -1,3 +1,6 @@
+package screens.game;
+
+import configuration.Settings;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,7 +26,7 @@ public class PlayerOne {
 
         this.layer = playfieldLayer;
 
-        playerImage = new Image(GameEngine.class.getResource("player.png").toExternalForm());
+        playerImage = new Image("player.png");
 
         this.imageView = new ImageView(playerImage);
         this.imageView.relocate(x, y);
